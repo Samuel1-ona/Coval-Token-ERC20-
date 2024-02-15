@@ -43,6 +43,14 @@ contract Coval {
         
     }
 
+ function totalSupply() external  view returns (uint256){
+        return  balanceOf[owner];
+    }
+
+    function balanceOF(address _owner) external view returns(uint256){
+        return balanceOf[_owner];
+    }
+
 
    
    
