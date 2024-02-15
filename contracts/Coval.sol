@@ -16,8 +16,8 @@ contract Coval {
 
     // Events for transfer
     event Transfer (
-        address indexed from,
-        address indexed to,
+        address indexed sender,
+        address indexed recipient,
         uint amount
     );
 
