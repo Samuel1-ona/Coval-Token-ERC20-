@@ -10,5 +10,28 @@ contract Coval {
     string public tokenName;
     address  owner;
 
+    // Mappings
+    mapping(address => uint)  balanceOf;
+    mapping(address => mapping(address => uint))  allowance;
+
+    // Events for transfer
+    event Transfer (
+        address indexed from,
+        address indexed to,
+        uint amount
+    );
+
+// Events for approval
+    event Approval(
+        address indexed owner,
+        address indexed spender,
+        uint amount
+    );
+
+      modifier onlyOwner {
+        require(msg.sender == owner, "Function can only be triggered by the owner");
+        _;
+    }
+
    
 }
