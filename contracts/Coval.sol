@@ -88,7 +88,13 @@ function transfer(address recipient, uint amount) external  {
         tokenSupply -= amount;
     }
 
-  
+    // Approval function
+    function approve(address spender, uint amount) private {
+        allowance[msg.sender][spender] = amount;
+        emit Approval(msg.sender, spender, amount);
+    }
+
+   
    
    
 }
