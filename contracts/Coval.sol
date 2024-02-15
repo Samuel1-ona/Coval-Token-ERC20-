@@ -76,7 +76,19 @@ function transfer(address recipient, uint amount) external  {
      emit Transfer(msg.sender, owner, fee);    // Emit Transfer event for the fee deduction
 }
 
-   
+   // Minting new tokens
+    function mintToken(uint _amount) onlyOwner private  {
+        tokenSupply += _amount;
+    }
+
+
+    // Burning tokens
+    function burn(uint amount) onlyOwner private  {
+        require(amount <= tokenSupply, "Burn amount exceeds total supply");
+        tokenSupply -= amount;
+    }
+
+  
    
    
 }
