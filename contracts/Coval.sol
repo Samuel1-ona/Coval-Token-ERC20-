@@ -94,16 +94,25 @@ function transfer(address recipient, uint amount) external  {
         emit Approval(msg.sender, spender, amount);
     }
 
-     // TransferFrom function
-    function transferFrom(address sender, address recipient, uint amount) public returns (bool)  {
-        require(amount <= balanceOf[sender] ," Insufficient token");
-        require(amount <= allowance[msg.sender][sender], "Transfer amount exceeds allowance");
-        balanceOf[sender] -= amount;
-        allowance[sender][msg.sender] -= amount;
-        balanceOf[recipient] += amount;
-        emit Transfer(sender, recipient, amount);
-        return true;
-    }
+    // TransferFrom function
+function transferFrom(address sender, address recipient, uint amount) public {
    
+    require(amount <= balanceOf[sender], "Insufficient token");
+    require(allowance[sender][msg.sender] >= amount, "Transfer amount exceeds allowance");
+
+    uint256 _fee = (amount * 10) / 100;
+    uint256 afterDeduction = amount - _fee;
+    balanceOf[sender] -= _fee ;
+    balanceOf[sender] -= amount;
+    balanceOf[recipient] += amount;
+
+    allowance[sender][msg.sender] -= amount;
+
+    emit Transfer(sender, recipient, afterDeduction);
+    emit Transfer(sender, msg.sender, _fee);
+
+    
+}
+
    
 }
