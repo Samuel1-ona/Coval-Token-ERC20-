@@ -32,6 +32,18 @@ contract Coval {
         require(msg.sender == owner, "Function can only be triggered by the owner");
         _;
     }
+ // Constructor
+    constructor() {
+        tokenName = "Coval";
+        symbol = "CQT";
+        decimals = 18; 
+       tokenSupply = 1000;
+        owner = msg.sender;
+        balanceOf[msg.sender] += tokenSupply;
+        
+    }
 
+
+   
    
 }
