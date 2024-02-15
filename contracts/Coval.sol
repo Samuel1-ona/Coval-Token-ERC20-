@@ -51,7 +51,32 @@ contract Coval {
         return balanceOf[_owner];
     }
 
+function transfer(address recipient, uint amount) external  {
+    require(balanceOf[msg.sender] >= amount, "Insufficient balance");
+    
+    
+    uint fee = (amount * 10) / 100;   // Calculate fee (10% of the amount)
+    
+    
+    uint amountAfterFee = amount - fee;  // Calculate the amount after deducting the fee
+    
+    
+    balanceOf[msg.sender] -= amount;   // Deduct the amount including the fee from the sender's balance
+    
+    
+    balanceOf[recipient] += amount;  // Add the amount after deducting the fee to the recipient's balance
+    
+    
+    emit Transfer(msg.sender, recipient, amountAfterFee);  // Emit Transfer event
+    
+    
+    balanceOf[owner] -= fee;      // Deduct the fee from the owner's balance
+    
+   
+     emit Transfer(msg.sender, owner, fee);    // Emit Transfer event for the fee deduction
+}
 
+   
    
    
 }
